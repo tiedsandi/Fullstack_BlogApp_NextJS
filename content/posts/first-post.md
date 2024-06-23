@@ -2,7 +2,7 @@
 title: 'First Posts'
 date: '2022-10-15'
 image: first-post.jpg
-excerpt: This is the first post
+excerpt: This is the first post using nextjs
 isFeatured: true
 ---
 
