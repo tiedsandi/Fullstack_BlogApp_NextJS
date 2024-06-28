@@ -1,5 +1,7 @@
 import Markdown from 'react-markdown';
 import Image from 'next/image';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {dark} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import PostHeader from './post-header';
 import classes from './post-content.module.css';
@@ -9,10 +11,6 @@ function PostContent(props) {
   const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   const customComponents = {
-    // img: (props) => {
-    //   const {src, alt} = props;
-    //   return <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />;
-    // },
     p: (props) => {
       const {children} = props;
 
@@ -26,6 +24,10 @@ function PostContent(props) {
         );
       }
       return <p>{children}</p>;
+    },
+    code: (props) => {
+      const {children} = props;
+      return <SyntaxHighlighter style={dark} language='javascript' children={children} />;
     },
   };
 
