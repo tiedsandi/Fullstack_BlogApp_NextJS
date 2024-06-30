@@ -1,4 +1,6 @@
-function handler(req, res) {
+import {MongoClient} from 'mongodb';
+
+async function handler(req, res) {
   if (req.method === 'POST') {
     const {name, email, message} = req.body;
 
@@ -17,7 +19,25 @@ function handler(req, res) {
     //store it in a database
     const newMessage = {email, name, message};
 
-    console.log(newMessage);
+    //connect to the database
+    let client;
+    try {
+      client = await MongoClient.connect(
+        'mongodb+srv://sandi:VrppPkMWW23jQTm7@cluster0.hewldxh.mongodb.net/my-site?retryWrites=true&w=majority'
+      );
+    } catch (error) {
+      res.status(500).json({message: 'Failed to connect to database'});
+      return;
+    }
+
+    const db = client.db();
+
+    try {
+      db.collection('messages').insertOne(newMessage);
+    } catch (error) {
+      res.status(500).json({message: 'Storing message failed'});
+      return;
+    }
 
     res.status(201).json({message: 'Message received', message: newMessage});
   }
