@@ -11,6 +11,7 @@ function Hero() {
           alt='An image showing Sandi'
           width={300}
           height={300}
+          priority
         />
       </div>
       <h1>Hi, I'm Sandi</h1>

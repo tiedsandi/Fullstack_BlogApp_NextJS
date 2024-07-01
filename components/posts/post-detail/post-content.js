@@ -19,7 +19,13 @@ function PostContent(props) {
 
         return (
           <div className={classes.image}>
-            <Image src={`/images/posts/${post.slug}/${src}`} alt={alt} width={600} height={300} />;
+            <Image
+              src={`/images/posts/${post.slug}/${src}`}
+              alt={alt}
+              width={600}
+              height={300}
+              priority
+            />
           </div>
         );
       }
